@@ -1,0 +1,7 @@
+# bookspedia
+Django Bookspedia app for heroku 2021 June
+
+
+
+
+THIS IS FOR DEMONSTRATION PURPOSES ONLY, PLEASE DONT COPY THE IDEA OR MORE SPECIFICALLY DONT BE thomas edison
