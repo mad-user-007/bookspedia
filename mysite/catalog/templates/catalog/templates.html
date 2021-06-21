@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html>
+
+    <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+    <!-- Latest compiled JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+    {% block head_tags %}
+
+    {% endblock head_tags%}
+        <title> {% block title %}  {% endblock title %} </title>
+        <style>
+        * {
+            box-sizing: border-box;
+        }
+        body {
+            margin: 0;
+            padding: 0;
+        }
+
+        .header {
+            padding: 30px;
+            margin-bottom: 80px;
+            display: flex;
+            width: 100%;
+            align-items: baseline;
+        }
+        .heading h1 {
+            color: blue;
+            font-size: 40px;
+        }
+        .heading h1 span {
+            color: red;
+            margin-left: -0.2em;
+        }
+        .heading p {
+            color: grey;
+            margin-top: -1em;
+        }
+        .nav {
+            margin: auto;
+        }
+        .nav a {
+            text-decoration: none;
+            color: black;
+            font-weight: bolder;
+            font-size: 18px;
+            margin: 0px;
+            font-family: 'Open Sans', sans-serif;
+            padding:10px;
+        }
+        .nav a:hover {
+            background-color: black;
+            color: white;
+        }
+        .active {
+            background-color: green;
+            color: white;
+        }
+        #footer {
+            padding: 20px 20px 0px 20px;
+            margin-top: 90px;
+            z-index: 900;
+            position: relative;
+        }
+        .about-add-book {
+            float: left;
+            width: 60%;
+            padding: 20px;
+        }
+        .important-links {
+            float: left;
+            width: 40%;
+        }
+        .important-links a {
+            color: black;
+            margin: 10px;
+            font-weight: 600;
+            text-decoration: none;
+        }
+        .important-links a:hover {
+            color: grey;
+        }
+        .about-add-book {
+            border-right: 4px solid rgba(0,0,0,0.2);
+        }
+        .copyright p {
+            font-weight: 700;
+            font-size: 18px;
+            text-align: center;
+        }
+        #footer::after {
+            content: '';
+            clear: left;
+            display: block;
+        }
+        .copyright {
+            clear: left;
+            margin: 40px;
+            padding-top: 40px;
+        }
+
+        .account_show a {
+            display: inline-block;
+            padding: 5px;
+            color: black;
+            text-decoration: none;
+            font-weight: bolder;
+            border: 1px solid rgba(0, 0, 255, 0.2);
+            border-radius: 5px;
+        }
+        .account_show {
+            position: relative;
+            width: fit-content;
+            display: flex;
+            align-items: center;
+        }
+        .img-sect {
+            margin-right: 10px;
+        }
+        .img-sect span {
+            font-size: 30px;
+        }
+        .profile .username {
+            margin-bottom: 0;
+            font-size: 18px;
+            font-family: 'Open Sans';
+            font-weight: bold;
+        } 
+        .profile span {
+            margin-top: 0;
+            color: grey;
+            font-size: 12px;
+        }
+        .total_books {
+            margin-top: 10px;
+            color: grey;
+        }
+    {% block style %}
+
+    {% endblock style %}
+        </style>
+    </head>
+
+    <body>
+    {% load static %}
+    <div class="header row">
+        <div class="heading col-lg-4">
+            <h1> Bookspedia <span>.</span> </h1>
+            <p> browse books from the orignal authors </p>
+        </div>
+        <div class="nav col-lg-6">
+            <a href="{% url 'home' %}"> Home</a>
+            {% if user.is_anonymous %}
+            <a href="{% url 'sign_up' %}"> Create account</a>
+            {% else %}
+            {% endif %}
+            <a href="{% url 'add_book' %}"> Add a book </a>
+            <a href="{% url 'contact' %}"> Contact Us</a>
+            </ul>
+        </div>
+        <div class="account_show">
+        {% if not user.is_anonymous %}
+            <div class="img-sect">
+            <span class="user_icon glyphicon glyphicon-user"></span>
+            </div>
+
+            <div class="profile">
+                <p class="username"> {{user.username}}</p>
+                <span> {{user.first_name}} {{user.last_name}}</span>
+                <p class="total_books">Books published: {{author.total_books}}</p>
+            </div>
+        {% else %}
+            <div class="img-sect">
+                <span class="glyphicon glyphicon-user"></span>            
+            </div>
+
+            <div class="profile">
+                <p>#guest_account</p>
+                <span>Guest</span>
+                
+            </div>
+        </div>
+        
+        {% endif %}
+        </div>
+        
+    </div>
+    {% block body %}
+
+    {% endblock body %}
+    <div id="footer">
+        <div class="about-add-book">
+        <h1> Add a book in simple steps </h1>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin feugiat eros ultrices, suscipit elit eu,
+         interdum erat. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.</p>
+        <p>Duis pellentesque imperdiet orci ac fermentum. In commodo magna ultricies nisi laoreet iaculis. 
+          Suspendisse facilisis diam eu dui venenatis blandit.</p>
+        <p>Vivamus et feugiat enim. Donec aliquet erat diam, euismod sollicitudin urna lobortis eget. In non pulvinar purus. Interdum et malesuada fames ac ante ipsum primis in faucibus.</p>
+        </div>
+        <div class="important-links">
+        <p><a href="{% url 'add_book' %}"> Add a book </a></p>
+        <p><a href="{% url 'contact' %}">  Contact Us </a></p>
+        <p><a href="{% url 'report' %}"> Report book/account </a></p>
+        </div>
+        <div class="copyright">
+        <p> &copy; Bookspedia, 2021, created with &#10084;&#65039;</p>
+        </div>
+    </div>
+    <script>
+    {% block script %}
+    {% endblock script %}
+    </script>
+    </body>
+    </html>

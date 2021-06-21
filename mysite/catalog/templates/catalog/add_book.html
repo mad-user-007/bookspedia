@@ -1,0 +1,16 @@
+{% extends 'templates.html' %}
+
+{% block title %} Add a book {% endblock title  %}
+
+{% block style %}
+
+{% endblock style %}
+
+{% block body %}
+<form>
+{% csrf_token %}
+<label for="book_name"> Name: </label>
+<input type="text" id="book_name">
+
+<label for="author_name"> 
+{% endblock body %}
